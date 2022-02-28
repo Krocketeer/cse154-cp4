@@ -36,7 +36,7 @@
 
     for (let i = 0; i < tab.length; i++) {
       tab[i].addEventListener('click', function() {
-        if (!tab[i].classList.contains('active')){
+        if (!tab[i].classList.contains('active')) {
           hideTab(lastTab);
           tab[i].classList.add('active');
           tabContent[i].classList.add('active');
@@ -175,11 +175,17 @@
     warning.append(errorMessage);
   }
 
+  /**
+   * Clears the section that displays the API data on the page
+   */
   function clearResponse() {
     let apiResponse = document.getElementById('api-response');
     apiResponse.innerHTML = '';
   }
 
+  /**
+   * Removes the error message from the page
+   */
   function clearError() {
     let warning = document.getElementById('warning');
     warning.classList.remove('active');

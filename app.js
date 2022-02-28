@@ -37,7 +37,7 @@ let cities = [
       ]}
 ];
 
-app.get('/city/:name', function(req, res){
+app.get('/city/:name', function(req, res) {
   res.type('json');
   let city = capitalizeFirstLetter(req.params['name']);
   for (let entry of cities) {
