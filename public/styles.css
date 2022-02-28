@@ -4,28 +4,39 @@
  * TA: Ludvig Liljenberg, Marina Wooden
  * 2/25/22
  * Creative Project #4:
- * Description:
+ * Description: Stylesheet for vacine appointment finder. Style
+ * consists of a simplistic dark blue theme with light blue and
+ * green highlights and white text.
  */
 
-html, body {
+html,
+body {
   font-size: 18px;
 }
 
-html, body, #banner h1 {
+html,
+body,
+#tabs,
+#banner h1 {
   margin: 0;
 }
 
 body {
   font-family: "Inter", "Helvetica", sans-serif;
-  color: #fafafa;
   background: #191b25;
 }
 
 h1 {
   font-size: 3rem;
   margin: 15px 0;
-  display: flex;
   justify-content: center;
+}
+
+h1,
+td,
+#tabs {
+  display: flex;
+
 }
 
 li {
@@ -33,15 +44,18 @@ li {
 }
 
 .tab-panel {
-  position: relative;
   padding: 30px 20px;
 }
 
+.tab,
+.tab-panel,
+.tab p {
+  position: relative;
+}
+
 #tabs {
-  display: flex;
   flex-flow: row nowrap;
   padding: 0 0 30px 0;
-  margin: 0;
 }
 
 #tabs li {
@@ -54,13 +68,22 @@ li {
   border-left: 3px solid #191b25;
   border-right: 3px solid #191b25;
   cursor: pointer;
+}
+
+.tab,
+#warning p {
   text-align: center;
-  position: relative;
 }
 
 .tab.active {
-  display: block;
   background: #0079C2;
+}
+
+.tab.active,
+.tab.active:after,
+.tab-content.active,
+#warning.active {
+  display: block;
 }
 
 .tab.active:after {
@@ -68,7 +91,6 @@ li {
   position: absolute;
   width: 30px;
   height: 30px;
-  display: block;
   transform: rotate(45deg);
   left: 0;
   right: 0;
@@ -80,22 +102,21 @@ li {
 
 .tab p {
   color: #191b25;
-  position: relative;
   z-index: 2;
 }
 
-.tab.active p, .tab.active:hover p {
+body,
+.tab.active p,
+.tab.active:hover p {
   color: #fafafa;
 }
 
-.tab-content {
+.tab-content,
+#warning {
   display: none;
 }
 
-.tab-content.active {
-  display: block;
-}
-
+td,
 #top-copy {
   padding-bottom: 15px;
 }
@@ -121,20 +142,9 @@ button {
 }
 
 td {
-  display: flex;
   flex-flow: column nowrap;
-  padding-bottom: 15px;
-}
-
-#warning {
-  display: none;
 }
 
 #warning p {
   color: red;
-  text-align: center;
-}
-
-#warning.active {
-  display: block;
 }

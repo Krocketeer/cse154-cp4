@@ -4,13 +4,19 @@
  * TA: Ludvig Liljenberg, Marina Wooden
  * 2/25/22
  * Creative Project #4:
- * Description:
+ * Description: Provides functionality for the vaccine appointment finder
+ * by taking user input for city or one of the three available vaccines
+ * and displays the results accordingly
  */
 
 "use strict";
 (function() {
   window.addEventListener('load', init);
 
+  /**
+   * Provides functionality for searching for vaccines by city or
+   * or cities by vaccine
+   */
   function init() {
     tabHandler();
     let vaccineButton = document.getElementById('vaccine-search');
@@ -20,6 +26,9 @@
     cityButton.addEventListener('click', searchVaccines);
   }
 
+  /**
+   * Provides functionality for switching tabs and content associated with each tab
+   */
   function tabHandler() {
     let tab = document.getElementsByClassName('tab');
     let tabContent = document.getElementsByClassName('tab-content');
@@ -37,6 +46,10 @@
     }
   }
 
+  /**
+   * Takes an index (from tab list) and hides the tab
+   * @param {Number} index : the index of the tab to be hidden
+   */
   function hideTab(index) {
     let tab = document.getElementsByClassName('tab');
     let tabContent = document.getElementsByClassName('tab-content');
@@ -45,6 +58,9 @@
     tabContent[index].classList.remove('active');
   }
 
+  /**
+   * Makes a request to the Vaccine API and displays cities with a specified vaccine in stock
+   */
   async function searchCities() {
     let vaccine = document.getElementById('vaccine').value;
     let cities = await makeRequest('/vaccine/', vaccine, false, 'GET');
@@ -59,6 +75,9 @@
     apiResponse.appendChild(paragraph);
   }
 
+  /**
+   * Makes a request to the Vaccine API and displays the vaccine stock for a specified city
+   */
   async function searchVaccines() {
     let city = document.getElementById('city').value;
     let vaccines = await makeRequest('/city/', city, true, 'GET');
@@ -86,6 +105,12 @@
     }
   }
 
+  /**
+   * Takes a string, capitalizes the first letter and lower cases everything else
+   * @param {string} str :the input string
+   * @returns {string} :the formatted string
+   * Base credit: https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
+   */
   function capitalizeFirstLetter(str) {
     str = String(str).toLowerCase();
     return str[0].toUpperCase() + str.slice(1);

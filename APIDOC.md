@@ -1,47 +1,51 @@
-# *FILL IN NAME* API Documentation
-*Fill in a short description here about the API's purpose.*
+# Vaccine API Documentation
+The Vaccine API provides information about vaccine stock in cities and cities with specified vaccines
 
-## *Fill in Endpoint 1 Title*
-**Request Format:** *Fill in example request format*
+## Get list of all cities
+**Request Format:** /city/:name
 
-**Request Type:** *Fill in request type*
-
-**Returned Data Format**: Plain Text
-
-**Description:** *Fill in description*
-
-
-**Example Request:** *Fill in example request*
-
-**Example Response:**
-*Fill in example response in the ticks*
-
-```
-
-```
-
-**Error Handling:**
-*Fill in an example of the error handling*
-
-## *Fill in Endpoint 2 Title*
-**Request Format:** *Fill in example request format*
-
-**Request Type:** *Fill in request type*
+**Request Type:** GET
 
 **Returned Data Format**: JSON
 
-**Description:** *Fill in description*
+**Description:**
+Returns a JSON of available vaccines and number of vaccines in a city
 
-**Example Request:** *Fill in example request*
+
+**Example Request:** /city/Seattle
+
+**Example Response:**
+```JSON
+  {"city": "Seattle", "vaccines":
+      [
+        {"vaccine-name": "Pfizer", "doses": 10},
+        {"vaccine-name": "Moderna", "doses": 10},
+        {"vaccine-name": "Johnson & Johnson", "doses": 20}
+      ]
+  }
+```
+
+**Error Handling:**
+Possible errors (400 status codes):
+- If city does not exist in API: No entries found for {city}. Please try again.
+
+## Get list of cities with vaccine
+**Request Format:** /vaccine/;brand
+
+**Request Type:** GET
+
+**Returned Data Format**: Plain Text
+
+**Description:** Given a valid vaccine brand, returns a list of cities with that vaccine in stock
+
+**Example Request:** /vaccine/pfizer
 
 **Example Response:**
 *Fill in example response in the {}*
 
-```json
-{
-
-}
+```
+Seattle, Kent, Bellevue
 ```
 
 **Error Handling:**
-*Fill in an example of the error handling*
+n/a

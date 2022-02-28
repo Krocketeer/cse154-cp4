@@ -4,7 +4,8 @@
  * TA: Ludvig Liljenberg, Marina Wooden
  * 2/25/22
  * Creative Project #4:
- * Description:
+ * Description: Provides API functionality for the vaccine appointment finder:
+ * information about vaccine stock in cities and cities with specified vaccines
  */
 
 'use strict';
@@ -32,11 +33,6 @@ let cities = [
         {'vaccine-name': 'Johnson & Johnson', 'doses': 40}
       ]
   },
-  {'city': 'Mercer Island', 'vaccines':
-      [
-        {'vaccine-name': 'Pfizer', 'doses': 20}
-      ]
-  },
   {'city': 'Bellevue', 'vaccines':
       [
         {'vaccine-name': 'Pfizer', 'doses': 2},
@@ -45,16 +41,16 @@ let cities = [
   }
 ];
 
-// https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
+/**
+ * Takes a string, capitalizes the first letter and lower cases everything else
+ * @param {string} str :the input string
+ * @returns {string} :the formatted string
+ * Base credit: https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
+ */
 function capitalizeFirstLetter(str) {
   str = String(str).toLowerCase();
   return str[0].toUpperCase() + str.slice(1);
 }
-
-app.get('/city/all', function(req, res) {
-  res.type('json');
-  res.send(cities);
-});
 
 app.get('/city/:name', function(req, res){
   res.type('json');
@@ -69,9 +65,9 @@ app.get('/city/:name', function(req, res){
 
 app.get('/vaccine/:brand', function(req, res) {
   res.type('text');
-  let pfizer = 'Seattle, Kent, Mercer Island, Bellevue';
+  let pfizer = 'Seattle, Kent, Bellevue';
   let moderna = 'Seattle, Renton';
-  let johnson = 'Seattle, Renton, Kent, Bellevue';
+  let johnson = 'Seattle, Kent, Bellevue';
   let vaccineNames = ['pfizer', 'moderna', 'johnson'];
   let name = req.params['brand'];
   name = name === 'Johnson & Johnson' ? 'johnson' : String(name).toLowerCase();
