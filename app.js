@@ -19,26 +19,22 @@ let cities = [
         {'vaccine-name': 'Pfizer', 'doses': 10},
         {'vaccine-name': 'Moderna', 'doses': 10},
         {'vaccine-name': 'Johnson & Johnson', 'doses': 20}
-      ]
-  },
+      ]},
   {'city': 'Renton', 'vaccines':
       [
         {'vaccine-name': 'Moderna', 'doses': 6},
         {'vaccine-name': 'Johnson & Johnson', 'doses': 14}
-      ]
-  },
+      ]},
   {'city': 'Kent', 'vaccines':
       [
         {'vaccine-name': 'Pfizer', 'doses': 16},
         {'vaccine-name': 'Johnson & Johnson', 'doses': 40}
-      ]
-  },
+      ]},
   {'city': 'Bellevue', 'vaccines':
       [
         {'vaccine-name': 'Pfizer', 'doses': 2},
         {'vaccine-name': 'Johnson & Johnson', 'doses': 4}
-      ]
-  }
+      ]}
 ];
 
 app.get('/city/:name', function(req, res){
