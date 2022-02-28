@@ -2,77 +2,91 @@
  * Kenny "Ackerson" Le
  * CSE 154 AF, Winter 2022
  * TA: Ludvig Liljenberg, Marina Wooden
- * 2/14/22
- * Creative Project #4: APIs
+ * 2/25/22
+ * Creative Project #4:
  * Description:
  */
 
 'use strict';
-
 const express = require('express');
 const multer = require('multer');
 const app = express();
 
-const path = require('path');
-
-app.get('/', function(req, res) {
-  res.type('text');
-  res.send('Hello World!');
-  // res.sendFile(path.join(__dirname, '/public/index.html'));
-})
-
-let categories = ['funnyJoke', 'lameJoke'];
-let funnyJoke = [
-  {
-    'joke': 'Why did the student eat his homework?',
-    'response': 'Because the teacher told him it was a piece of cake!'
+let cities = [
+  {'city': 'Seattle', 'vaccines':
+      [
+        {'vaccine-name': 'Pfizer', 'doses': 10},
+        {'vaccine-name': 'Moderna', 'doses': 10},
+        {'vaccine-name': 'Johnson & Johnson', 'doses': 20},
+      ]
   },
-  {
-    'joke': 'What kind of tree fits in your hand?',
-    'response': 'A palm tree'
+  {'city': 'Renton', 'vaccines':
+      [
+        {'vaccine-name': 'Moderna', 'doses': 6},
+        {'vaccine-name': 'Johnson & Johnson', 'doses': 14},
+      ]
   },
-  {
-    'joke': 'What is worse than raining cats and dogs?',
-    'response': 'Hailing taxis'
-  }
+  {'city': 'Kent', 'vaccines':
+      [
+        {'vaccine-name': 'Pfizer', 'doses': 16},
+        {'vaccine-name': 'Johnson & Johnson', 'doses': 40},
+      ]
+  },
+  {'city': 'Mercer Island', 'vaccines':
+      [
+        {'vaccine-name': 'Pfizer', 'doses': 20},
+      ]
+  },
+  {'city': 'Bellevue', 'vaccines':
+      [
+        {'vaccine-name': 'Pfizer', 'doses': 2},
+        {'vaccine-name': 'Johnson & Johnson', 'doses': 4},
+      ]
+  },
 ];
-let lameJoke = [
-  {
-    'joke': 'Which bear is the most condescending?',
-    'response': 'Pan-DUH'
-  },
-  {
-    'joke': 'What would the Terminator be called in his retirement?',
-    'response': 'The Exterminator'
-  }
-];
 
-// define endpoint 1 here
-app.get('/jokebook/categories', function(req, res) {
-  res.type('text');
-  let message = '';
-  for (let i = 0; i < categories.length; i++) {
-    message = message.concat(`A possible category is ${categories[i]}\n`)
-  }
-  res.send(message);
-})
-
-// define endpoint 2 here
-app.get('/jokebook/joke/:category', function(req, res) {
-  res.type('json');
-  let category = req.params['category']
-  if (categories.includes(category)) {
-    let joke = category === 'lameJoke' ? lameJoke : funnyJoke;
-    let rand = randomSelection(joke.length);
-    res.send(joke[rand]);
-  } else {
-    res.status(400).send({'error': 'no category listed for category'});
-  }
-})
-
-function randomSelection(numOptions) {
-  return Math.floor(Math.random() * numOptions);
+// https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
+function capitalizeFirstLetter(str) {
+  str = String(str).toLowerCase();
+  return str[0].toUpperCase() + str.slice(1);
 }
+
+app.get('/city/all', function(req, res) {
+  res.type('json');
+  res.send(cities);
+});
+
+app.get('/city/:name', function(req, res){
+  res.type('json');
+  let city = capitalizeFirstLetter(req.params['name']);
+  for (let entry of cities) {
+    if (city === entry['city']) {
+      res.send(entry);
+    }
+  }
+  res.status(400).send(`No entries found for ${city}. Please try again.`)
+});
+
+app.get('/vaccine/:brand', function(req, res) {
+  res.type('text');
+  let pfizer = 'Seattle, Kent, Mercer Island, Bellevue';
+  let moderna = 'Seattle, Renton';
+  let johnson = 'Seattle, Renton, Kent, Bellevue';
+  let vaccineNames = ['pfizer', 'moderna', 'johnson'];
+  let name = req.params['brand'];
+  name = name === 'Johnson & Johnson' ? 'johnson' : String(name).toLowerCase();
+  if (vaccineNames.includes(name)) {
+    if (name === 'pfizer') {
+      res.send(pfizer);
+    } else if (name === 'moderna') {
+      res.send(moderna);
+    } else {
+      res.send(johnson);
+    }
+  } else {
+    res.status(400).send("An error occurred, could not get results. Please try again");
+  }
+});
 
 app.use(express.static('public'));
 app.use(multer().none());

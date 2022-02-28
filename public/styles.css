@@ -2,12 +2,10 @@
  * Kenny "Ackerson" Le
  * CSE 154 AF, Winter 2022
  * TA: Ludvig Liljenberg, Marina Wooden
- * 1/5/22
- * Creative Project #1
- * Description: Global stylesheet for website which uses a purple theme based on Treact
+ * 2/25/22
+ * Creative Project #4:
+ * Description:
  */
-
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap");
 
 html, body {
   font-size: 18px;
@@ -30,8 +28,6 @@ h1 {
   justify-content: center;
 }
 
-/* - - - - - - -  - - - - - -  - - - - - - - - - - - - - - - - - -*/
-
 li {
   list-style-type: none;
 }
@@ -44,22 +40,17 @@ li {
 #tabs {
   display: flex;
   flex-flow: row nowrap;
-  /*justify-content: space-around;*/
   padding: 0 0 30px 0;
   margin: 0;
-  /*position: relative;*/
-  /*left: 50%;*/
-  /*transform: translate(-50%, 0);*/
-  /*margin: 85px 0 0 0;*/
 }
 
 #tabs li {
-  width: 25%;
+  width: 20%;
 }
 
 .tab {
   background: #f7f7f7;
-  padding: 30px 0;
+  padding: 2px 0;
   border-left: 3px solid #191b25;
   border-right: 3px solid #191b25;
   cursor: pointer;
@@ -75,29 +66,16 @@ li {
 .tab.active::after {
   content: '';
   position: absolute;
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
   display: block;
   transform: rotate(45deg);
   left: 0;
   right: 0;
   margin: 0 auto;
-  bottom: -18px;
+  bottom: -15px;
   background-color: #0079C2;
   border: none;
-}
-
-.tab::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 9px;
-  background: #0079C2;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: 0 auto;
-  z-index: 1;
 }
 
 .tab p {
@@ -130,176 +108,42 @@ li {
   padding-bottom: 15px;
 }
 
-@media (min-width: 760px) {
-  .tab-panel, .tab {
-    padding: 30px 60px;
-  }
+.container {
+  padding: 2rem 6rem;
+  /* overflow: hidden; */
+  max-width: 1280px;
+  margin-right: auto;
+  margin-left: auto;
+  min-height: 72vh;
 }
 
-/* - - - - - - -  - - - - - -  - - - - - - - - - - - - - - - - - -*/
+input, select, button {
+  padding: 10px 12px;
+  border: 1px solid #555;
+  border-radius: 5px;
+  outline: none;
+}
 
-/*h2 {*/
-/*  font-size: 2.5rem;*/
-/*}*/
+button {
+  background-color: #32cb8b;
+  color: #fff;
+}
 
-/*h3 {*/
-/*  font-size: 1.5rem;*/
-/*}*/
+td {
+  display: flex;
+  flex-flow: column nowrap;
+  padding-bottom: 15px;
+}
 
-/*a, .purple, header a:hover {*/
-/*  color: rgb(100, 21, 255);*/
-/*}*/
+#warning {
+  display: none;
+}
 
-/*a {*/
-/*  text-decoration: none;*/
-/*}*/
+#warning p {
+  color: red;
+  text-align: center;
+}
 
-/*header, .vertical-alignment, .horizontal-alignment {*/
-/*  display: flex;*/
-/*}*/
-
-/*header, .horizontal-alignment {*/
-/*  flex-flow: row nowrap;*/
-/*}*/
-
-/*.vertical-alignment {*/
-/*  flex-flow: column nowrap;*/
-/*}*/
-
-/*.vertical-alignment, .horizontal-alignment {*/
-/*  justify-content: center;*/
-/*}*/
-
-/*header, #banner, .accordion-header {*/
-/*  justify-content: space-between;*/
-/*}*/
-
-/*header a, .footer-icon {*/
-/*  font-size: 28px;*/
-/*}*/
-
-/*header a {*/
-/*  color: rgb(36, 62, 99);*/
-/*  font-weight: 600;*/
-/*}*/
-
-/*header a:nth-child(2):hover {*/
-/*  text-decoration: underline;*/
-/*  text-underline-offset: 10px;*/
-/*}*/
-
-/*footer {*/
-/*  background-color: rgb(237, 242, 247);*/
-/*  padding: 2.5rem 0;*/
-/*}*/
-
-/*footer p {*/
-/*  font-size: 0.875rem;*/
-/*  margin-top: 2.5rem;*/
-/*  margin-bottom: 0;*/
-/*}*/
-
-/*footer div a:nth-child(-n + 2) {*/
-/*  margin: 0 40px 0 0;*/
-/*}*/
-
-/*footer, .horizontal-alignment {*/
-/*  align-items: center;*/
-/*}*/
-
-/*.footer-icon img {*/
-/*  width: 1em;*/
-/*  height: 1em;*/
-/*}*/
-
-/*#about, #banner {*/
-/*  padding: 6rem 0;*/
-/*}*/
-
-/*#about-text, .accordion-title {*/
-/*  text-align: left;*/
-/*}*/
-
-/*#about-text {*/
-/*  width: 42%;*/
-/*  min-width: 42%;*/
-/*}*/
-
-/*#about-text p {*/
-/*  font-size: 1.15rem;*/
-/*  line-height: 1.5;*/
-/*}*/
-
-/*#about img {*/
-/*  max-width: 48rem;*/
-/*  width: 100%;*/
-/*}*/
-
-/*#banner img {*/
-/*  height: 20rem;*/
-/*  width: 20rem;*/
-/*}*/
-
-/*.dog-image {*/
-/*  width: 15rem;*/
-/*  height: auto;*/
-/*}*/
-
-/*#accordion-layout {*/
-/*  padding: 20px 0;*/
-/*}*/
-
-/*.accordion-header {*/
-/*  border-top: 2px solid rgb(100, 21, 255);*/
-/*}*/
-
-/*.accordion-header, .accordion-title {*/
-/*  cursor: pointer;*/
-/*}*/
-
-/*.accordion-title {*/
-/*  padding: 16px 0;*/
-/*  border: none;*/
-/*  outline: none;*/
-/*}*/
-
-/*.accordion-button {*/
-/*  transition: 0.2s ease-out;*/
-/*}*/
-
-/*.row-text {*/
-/*  max-height: 0;*/
-/*  transition: max-height 0.2s ease-out;*/
-/*  overflow: hidden;*/
-/*  padding: 0 0;*/
-/*}*/
-
-/*.row-text.active {*/
-/*  margin-top: 0;*/
-/*  margin-bottom: 16px;*/
-/*}*/
-
-/*#last-row {*/
-/*  border-bottom: 2px solid rgb(100, 21, 255);*/
-/*}*/
-
-/*!* DESKTOP & TABLET *!*/
-
-/*@media (min-width: 768px) {*/
-/*  html, body {*/
-/*    font-size: 21px;*/
-/*  }*/
-
-/*  .container {*/
-/*    padding: 2rem 6rem;*/
-/*    !* overflow: hidden; *!*/
-/*    max-width: 1280px;*/
-/*    margin-right: auto;*/
-/*    margin-left: auto;*/
-/*    min-height: 72vh;*/
-/*  }*/
-
-/*  .row-text.active {*/
-/*    margin: 16px 0;*/
-/*  }*/
-/*}*/
+#warning.active {
+  display: block;
+}

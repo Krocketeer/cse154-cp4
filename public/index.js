@@ -2,9 +2,9 @@
  * Kenny "Ackerson" Le
  * CSE 154 AF, Winter 2022
  * TA: Ludvig Liljenberg, Marina Wooden
- * 2/22/22
- * Creative Project #4
- * Description: Javascript file to control accordion element on about page
+ * 2/25/22
+ * Creative Project #4:
+ * Description:
  */
 
 "use strict";
@@ -12,34 +12,85 @@
   window.addEventListener('load', init);
 
   function init() {
-    let t = document.getElementsByClassName('tab');
-    let tc = document.getElementsByClassName('tab-content');
+    tabHandler();
+    let vaccineButton = document.getElementById('vaccine-search');
+    vaccineButton.addEventListener('click', searchCities);
+
+    let cityButton = document.getElementById('city-search');
+    cityButton.addEventListener('click', searchVaccines);
+  }
+
+  function tabHandler() {
+    let tab = document.getElementsByClassName('tab');
+    let tabContent = document.getElementsByClassName('tab-content');
     let lastTab = 0;
 
-    for (let i = 0; i < t.length; i++){
-      t[i].addEventListener('click', function() {
-        if (!t[i].classList.contains('active')){
+    for (let i = 0; i < tab.length; i++){
+      tab[i].addEventListener('click', function() {
+        if (!tab[i].classList.contains('active')){
           hideTab(lastTab);
-          t[i].classList.add('active');
-          tc[i].classList.add('active');
+          tab[i].classList.add('active');
+          tabContent[i].classList.add('active');
           lastTab = i;
         }
       })
     }
-
-    let testButton = document.getElementById('testy-test');
-    testButton.addEventListener('click', async function() {
-      console.log('Do I get here?');
-      let thing = await makeRequest('/', 'jokebook/categories', false, 'GET');
-      console.log(`This is the thing: ${thing}`)
-    })
-
-    function hideTab(index) {
-      t[index].classList.remove('active');
-      tc[index].classList.remove('active');
-    }
   }
 
+  function hideTab(index) {
+    let tab = document.getElementsByClassName('tab');
+    let tabContent = document.getElementsByClassName('tab-content');
+
+    tab[index].classList.remove('active');
+    tabContent[index].classList.remove('active');
+  }
+
+  async function searchCities() {
+    let vaccine = document.getElementById('vaccine').value;
+    let cities = await makeRequest('/vaccine/', vaccine, false, 'GET');
+    let apiResponse = document.getElementById('api-response');
+    let paragraph = document.createElement('p');
+    if (cities !== null) {
+      clearResponse();
+      clearError();
+      paragraph.classList.add('tab-panel');
+      paragraph.textContent = `You can find ${vaccine} vaccines in ${cities}`;
+    }
+    apiResponse.appendChild(paragraph);
+  }
+
+  async function searchVaccines() {
+    let city = document.getElementById('city').value;
+    let vaccines = await makeRequest('/city/', city, true, 'GET');
+    let apiResponse = document.getElementById('api-response');
+    clearResponse();
+    let paragraph = document.createElement('p');
+
+    if (vaccines !== null) {
+      clearError();
+      paragraph.classList.add('tab-panel');
+      paragraph.textContent = `These are the current vaccine stocks for ${capitalizeFirstLetter(city)}`;
+      apiResponse.appendChild(paragraph);
+
+      let table = document.createElement('table');
+      table.classList.add('tab-panel');
+      for (let entry of vaccines['vaccines']) {
+        let tableRow = document.createElement('tr');
+        let tableData = document.createElement('td');
+        tableData.textContent = `${entry['vaccine-name']}: ${entry['doses']}`;
+        tableRow.appendChild(tableData);
+        table.appendChild(tableRow);
+      }
+      apiResponse.appendChild(table);
+    }
+
+    console.log(vaccines);
+  }
+
+  function capitalizeFirstLetter(str) {
+    str = String(str).toLowerCase();
+    return str[0].toUpperCase() + str.slice(1);
+  }
 
   /**
    * Takes the base url, the parameters, if the response is JSON,
@@ -54,7 +105,6 @@
   function makeRequest(baseUrl, params, isJSON, method, methodParams = null) {
     let url = baseUrl + `${params}`;
     let methodRequest = methodParams ? {method: method, body: methodParams} : {method: method};
-    console.log(`This is the url: ${url}`);
     return safeGet(url, isJSON, methodRequest);
   }
 
@@ -77,8 +127,40 @@
       }
     } catch (err) {
       console.error(err);
+      handleError(err);
       return null;
     }
+  }
+
+  /**
+   * Displays an error message on the page and the error code
+   * when the API call fails
+   * @param {Error} err Error message from API call
+   */
+  function handleError(err) {
+    clearResponse();
+
+    let warning = document.getElementById('warning');
+    warning.classList.add('active');
+    warning.classList.add('active');
+
+    console.log('Do I get here?');
+    let errorMessage = document.createElement('p');
+    errorMessage.textContent = `Full error message: ${err.message}`;
+    if (warning.children.length > 1) {
+      warning.removeChild(warning.lastChild);
+    }
+    warning.append(errorMessage);
+  }
+
+  function clearResponse() {
+    let apiResponse = document.getElementById('api-response');
+    apiResponse.innerHTML = '';
+  }
+
+  function clearError() {
+    let warning = document.getElementById('warning');
+    warning.classList.remove('active');
   }
 
   /**

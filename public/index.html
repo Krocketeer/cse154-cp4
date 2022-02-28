@@ -4,9 +4,9 @@
   * Kenny "Ackerson" Le
   * CSE 154 AF, Winter 2022
   * TA: Ludvig Liljenberg, Marina Wooden
-  * 1/5/22
-  * Creative Project #1
-  * Description: Home page to CSE 154 portfolio with links to projects
+  * 2/25/22
+  * Creative Project #4:
+  * Description:
   ***
 -->
 <html lang="en">
@@ -14,41 +14,66 @@
   <meta charset="UTF-8">
   <title>Vaccine Scheduler</title>
   <link href="styles.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
   <script src="index.js"></script>
 </head>
 <body>
-  <header><h1>Vaccine Scheduler</h1></header>
-
-  <section>
-    <div class="container tab-panel">
+  <header><h1>Vaccine Appointment Finder</h1></header>
+  <div class="container">
+    <section class="tab-panel">
       <p id="top-copy">
-        Use the form below to schedule an appointment. If you already have an appointment, you can search for
-        more details about your appointment.
+        Use the form below to find an appointment by vaccine type or by city.
+        If searching in all cities, input 'all'.
       </p>
 
       <ul id="tabs">
         <li>
           <div class="tab active" id="tab1">
-            <p>Schedule Appointment</p>
+            <p>Vaccine Type</p>
           </div>
         </li>
         <li>
           <div class="tab" id="tab2">
-            <p>Find Appointment</p>
+            <p>City</p>
           </div>
         </li>
       </ul>
 
       <div class="tab-content-container">
         <div class="tab-content active" id="tab1-content">
-          <p>1Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore eos dolorem velit cupiditate doloribus illum beatae quos voluptatibus ut necessitatibus itaque repellendus ea non, maiores tenetur a mollitia odit fugit.</p>
-          <button id="testy-test">click me!</button>
+          <table>
+            <tr>
+              <td>
+                <label for="vaccine">Vaccine</label>
+                <select id="vaccine">
+                  <option>Pfizer</option>
+                  <option>Moderna</option>
+                  <option>Johnson & Johnson</option>
+                </select>
+              </td>
+            </tr>
+          </table>
+          <button id="vaccine-search">Search</button>
         </div>
         <div class="tab-content" id="tab2-content">
-          <p>2Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore eos dolorem velit cupiditate doloribus illum beatae quos voluptatibus ut necessitatibus itaque repellendus ea non, maiores tenetur a mollitia odit fugit.</p>
+          <table>
+            <tr>
+              <td>
+                <label for="city">City</label>
+                <input id="city" type="text" autocomplete="off" placeholder="Enter city name">
+              </td>
+            </tr>
+          </table>
+          <button id="city-search">Search</button>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+    <section id="api-response">
+
+    </section>
+    <section id="warning">
+      <p>Unexpected error occurred. Please try searching again.</p>
+    </section>
+  </div>
 </body>
 </html>
