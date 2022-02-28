@@ -83,8 +83,6 @@
       }
       apiResponse.appendChild(table);
     }
-
-    console.log(vaccines);
   }
 
   function capitalizeFirstLetter(str) {
@@ -126,7 +124,6 @@
         return await response.text();
       }
     } catch (err) {
-      console.error(err);
       handleError(err);
       return null;
     }
@@ -144,7 +141,6 @@
     warning.classList.add('active');
     warning.classList.add('active');
 
-    console.log('Do I get here?');
     let errorMessage = document.createElement('p');
     errorMessage.textContent = `Full error message: ${err.message}`;
     if (warning.children.length > 1) {
