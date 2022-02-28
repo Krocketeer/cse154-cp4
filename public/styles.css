@@ -63,7 +63,7 @@ li {
   background: #0079C2;
 }
 
-.tab.active::after {
+.tab.active:after {
   content: '';
   position: absolute;
   width: 30px;
@@ -84,14 +84,6 @@ li {
   z-index: 2;
 }
 
-.tab:not(.active):hover::after {
-  animation: activeTab .5s ease-in-out 0s 1 forwards;
-}
-
-.tab:not(.active):hover p {
-  animation: activeTabHeadline .5s ease-in-out 0s 1 normal forwards;
-}
-
 .tab.active p, .tab.active:hover p {
   color: #fafafa;
 }
@@ -110,7 +102,6 @@ li {
 
 .container {
   padding: 2rem 6rem;
-  /* overflow: hidden; */
   max-width: 1280px;
   margin-right: auto;
   margin-left: auto;

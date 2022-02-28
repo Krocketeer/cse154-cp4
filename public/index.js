@@ -25,7 +25,7 @@
     let tabContent = document.getElementsByClassName('tab-content');
     let lastTab = 0;
 
-    for (let i = 0; i < tab.length; i++){
+    for (let i = 0; i < tab.length; i++) {
       tab[i].addEventListener('click', function() {
         if (!tab[i].classList.contains('active')){
           hideTab(lastTab);
@@ -33,7 +33,7 @@
           tabContent[i].classList.add('active');
           lastTab = i;
         }
-      })
+      });
     }
   }
 
@@ -69,7 +69,8 @@
     if (vaccines !== null) {
       clearError();
       paragraph.classList.add('tab-panel');
-      paragraph.textContent = `These are the current vaccine stocks for ${capitalizeFirstLetter(city)}`;
+      paragraph.textContent = `These are the current 
+        vaccine stocks for ${capitalizeFirstLetter(city)}`;
       apiResponse.appendChild(paragraph);
 
       let table = document.createElement('table');

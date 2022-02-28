@@ -17,32 +17,32 @@ let cities = [
       [
         {'vaccine-name': 'Pfizer', 'doses': 10},
         {'vaccine-name': 'Moderna', 'doses': 10},
-        {'vaccine-name': 'Johnson & Johnson', 'doses': 20},
+        {'vaccine-name': 'Johnson & Johnson', 'doses': 20}
       ]
   },
   {'city': 'Renton', 'vaccines':
       [
         {'vaccine-name': 'Moderna', 'doses': 6},
-        {'vaccine-name': 'Johnson & Johnson', 'doses': 14},
+        {'vaccine-name': 'Johnson & Johnson', 'doses': 14}
       ]
   },
   {'city': 'Kent', 'vaccines':
       [
         {'vaccine-name': 'Pfizer', 'doses': 16},
-        {'vaccine-name': 'Johnson & Johnson', 'doses': 40},
+        {'vaccine-name': 'Johnson & Johnson', 'doses': 40}
       ]
   },
   {'city': 'Mercer Island', 'vaccines':
       [
-        {'vaccine-name': 'Pfizer', 'doses': 20},
+        {'vaccine-name': 'Pfizer', 'doses': 20}
       ]
   },
   {'city': 'Bellevue', 'vaccines':
       [
         {'vaccine-name': 'Pfizer', 'doses': 2},
-        {'vaccine-name': 'Johnson & Johnson', 'doses': 4},
+        {'vaccine-name': 'Johnson & Johnson', 'doses': 4}
       ]
-  },
+  }
 ];
 
 // https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
@@ -64,7 +64,7 @@ app.get('/city/:name', function(req, res){
       res.send(entry);
     }
   }
-  res.status(400).send(`No entries found for ${city}. Please try again.`)
+  res.status(400).send(`No entries found for ${city}. Please try again.`);
 });
 
 app.get('/vaccine/:brand', function(req, res) {
