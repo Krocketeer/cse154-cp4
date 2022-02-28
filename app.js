@@ -41,17 +41,6 @@ let cities = [
   }
 ];
 
-/**
- * Takes a string, capitalizes the first letter and lower cases everything else
- * @param {string} str :the input string
- * @returns {string} :the formatted string
- * Base credit: https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
- */
-function capitalizeFirstLetter(str) {
-  str = String(str).toLowerCase();
-  return str[0].toUpperCase() + str.slice(1);
-}
-
 app.get('/city/:name', function(req, res){
   res.type('json');
   let city = capitalizeFirstLetter(req.params['name']);
@@ -83,6 +72,17 @@ app.get('/vaccine/:brand', function(req, res) {
     res.status(400).send("An error occurred, could not get results. Please try again");
   }
 });
+
+/**
+ * Takes a string, capitalizes the first letter and lower cases everything else
+ * @param {string} str :the input string
+ * @returns {string} :the formatted string
+ * Base credit: https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
+ */
+function capitalizeFirstLetter(str) {
+  str = String(str).toLowerCase();
+  return str[0].toUpperCase() + str.slice(1);
+}
 
 app.use(express.static('public'));
 app.use(multer().none());
